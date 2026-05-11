@@ -34,8 +34,8 @@ const socialLinks = [
       <!-- HERO -->
       <section class="hero">
         <div class="hero-nav">
-          <!-- Oben links jetzt leer oder nur Standort -->
-          <span>ENGELSKIRCHEN / 2026</span>
+         <img src="/images/kiffi/kiffi_logo_white.png" alt="Kiffi Logo" style="height: 50px; width: auto; opacity: 0.9;" />
+         <span>GERMANY / 2026</span>
         </div>
         
         <h1>{bandName}</h1>
@@ -69,7 +69,26 @@ const socialLinks = [
           ))}
         </div>
       </section>
-
+      //merch
+      <section id="merch" class="content-section">
+  <h2 class="section-title">MERCH</h2>
+  <div class="merch-grid">
+    <div class="merch-item">
+      <div class="merch-img-container">
+         <img src="/images/merch/shirt.jpg" alt="Tube Shirt" />
+      </div>
+      <h3>SHIRT "CLASSIC"</h3>
+      <p>Bestellung via Mail</p>
+    </div>
+    <div class="merch-item">
+      <div class="merch-img-container">
+         <img src="/images/merch/lighter.jpg" alt="Tube Feuerzeug" />
+      </div>
+      <h3>FEUERZEUG</h3>
+      <p>Bestellung via Mail</p>
+    </div>
+  </div>
+</section>
       <!-- ARCHIVE -->
       <section id="archive" class="content-section">
         <h2 class="section-title">ARCHIVE</h2>
@@ -84,17 +103,16 @@ const socialLinks = [
     </main>
 
     <!-- FOOTER -->
-    <footer>
-      <div class="footer-content">
-        <h2>{bandName}</h2>
-        <div class="social-links-bottom">
-          {socialLinks.map(link => (
-            <a href={link.url} target="_blank">{link.name}</a>
-          ))}
-        </div>
-        <p class="copyright">© 2026 TUBE. DESIGNED FOR THE LOUD.</p>
-      </div>
-    </footer>
+  <footer>
+  <div class="footer-content">
+    <img src="/images/kiffi/kiffi_logo_white.png" alt="Logo" style="height: 40px; opacity: 0.4; margin-bottom: 1rem;" />
+    <h2>{bandName}</h2>
+    <a href="mailto:tubeband.business@gmail.com" style="color: var(--accent); text-decoration: none; font-family: monospace;">
+      tubeband.business@gmail.com
+    </a>
+    <p class="copyright" style="margin-top: 3rem; opacity: 0.2;">© 2026 TUBE. DESIGNED FOR THE LOUD.</p>
+  </div>
+</footer>
 
     <!-- LIGHTBOX -->
     <div id="lightbox" class="lightbox">
