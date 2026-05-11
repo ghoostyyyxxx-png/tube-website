@@ -1,5 +1,7 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  // Falls hier 'base' steht, lösche die Zeile oder setze sie auf '/'
+  base: '/',
+  // Stelle sicher, dass kein spezielles outDir definiert ist
+});

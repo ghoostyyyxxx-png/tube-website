@@ -6,7 +6,11 @@ const allImages = import.meta.glob('/public/images/archive/*.{jpg,jpeg,png,webp}
   eager: true,
   query: '?url' 
 });
-const archive = Object.values(allImages).map((img: any) => img.default.replace('/public', ''));
+
+const archive = Object.values(allImages).map((img: any) => {
+  // Wir stellen sicher, dass der Pfad für den Browser sauber ist
+  return img.default.replace('/public', '');
+});
 
 const bandName = "TUBE";
 // YouTube entfernt, nur noch Instagram und Spotify
