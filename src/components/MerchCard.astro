@@ -9,5 +9,6 @@ const { shirt } = Astro.props;
     data-alt={`/images/merch/${shirt.alt}.png`}
     alt={`Shirt ${shirt.id}`}
   />
+  <link rel="prefetch" href={`/images/merch/${shirt.alt}.png`} />
   <p class="tap-hint">Tap to flip</p>
 </div>

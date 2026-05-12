@@ -79,6 +79,10 @@ const shirts = [
           ))}
         </div>
       </section>
+      <div class="newsletter-info">
+  <h3>GIG ALARM</h3>
+  <p>Keine Lust auf Social Media Algorithmen? Trag dich ein und erfahre als Erster, wenn wir neue Shows spielen oder Merch droppen.</p>
+</div>
 
       <Newsletter />
     </main>
@@ -297,6 +301,23 @@ const shirts = [
     .merch-grid { grid-template-columns: 1fr; }
     :global(#newsletter-form) { flex-direction: column; }
   }
+  .newsletter-info {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.newsletter-info h3 {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+.newsletter-info p {
+  opacity: 0.5;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
 </style>
 
 <script>
