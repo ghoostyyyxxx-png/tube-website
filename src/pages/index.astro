@@ -70,24 +70,19 @@ const socialLinks = [
         </div>
       </section>
       <!--MERCH --> 
-      <section id="merch" class="content-section">
+    <section id="merch" class="content-section">
   <h2 class="section-title">MERCH</h2>
   <div class="merch-grid">
     <div class="merch-item">
       <div class="merch-img-container">
-         <img src="/images/merch/shirt.jpg" alt="Tube Shirt" />
+        <img src="/images/merch/bild1.jpg" alt="Merch Item" />
       </div>
-      <h3>SHIRT "CLASSIC"</h3>
-      <p>Bestellung via Mail</p>
-    </div>
-    <div class="merch-item">
-      <div class="merch-img-container">
-         <img src="/images/merch/lighter.jpg" alt="Tube Feuerzeug" />
+      <div class="merch-meta">
+        <h3>ARTIKEL NAME</h3>
+        <p>PREIS / BESTELLUNG VIA MAIL</p>
       </div>
-      <h3>FEUERZEUG</h3>
-      <p>Bestellung via Mail</p>
     </div>
-  </div>
+    </div>
 </section>
       <!-- ARCHIVE -->
       <section id="archive" class="content-section">
@@ -100,6 +95,16 @@ const socialLinks = [
           ))}
         </div>
       </section>
+      <section class="gig-alarm">
+  <div class="alarm-content">
+    <h2>GIG ALARM</h2>
+    <p>Kein Spam. Nur eine Mail, wenn wir in deiner Stadt spielen.</p>
+    <form class="alarm-form">
+      <input type="email" placeholder="DEINE E-MAIL ADRESSE" required />
+      <button type="submit" class="alarm-btn">JOIN</button>
+    </form>
+  </div>
+</section>
     </main>
 
     <!-- FOOTER -->
@@ -121,6 +126,7 @@ const socialLinks = [
     </div>
 
   </body>
+  <img src="/images/kiffi/kiffi_logo_white.png" class="bg-watermark" alt="" />
 </html>
 
 <style>
@@ -129,7 +135,17 @@ const socialLinks = [
   --bg: #000000; /* Hier auf echtes Schwarz setzen */
   --text: #ffffff;
 }
-
+.bg-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw; /* Schön groß */
+  opacity: 0.03; /* Extrem dezent, fast wie ein Wasserzeichen */
+  z-index: -1; /* Hinter allem anderen */
+  pointer-events: none; /* Man kann nicht draufklicken */
+  filter: grayscale(1);
+}
 body {
   background-color: var(--bg); /* Stellt sicher, dass er die Variable nutzt */
   color: var(--text);
@@ -137,25 +153,17 @@ body {
     margin: 0;
 }
 
-/* Logo in der oberen Leiste */
-  .nav-logo {
-    height: 80px; /* Vorher 40px oder 50px - hier kannst du beliebig hochdrehen */
-    width: auto;
-    opacity: 1;   /* Volle Deckkraft, damit es richtig knallt */
-    transition: transform 0.3s ease;
-  }
-
-  .nav-logo:hover {
-    transform: scale(1.05); /* Kleiner Effekt beim Drüberfahren */
-  }
-
-  /* Logo im Footer */
-  .footer-logo {
-    height: 100px; /* Im Footer darf es ruhig noch eine Schippe größer sein */
-    margin-bottom: 2rem;
-    opacity: 0.7;
-  }
-
+.bg-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw; /* Schön groß über den Bildschirm */
+  opacity: 0.03; /* Extrem dezent, damit es nicht stört */
+  z-index: -1; /* Ganz nach hinten hinter den Content */
+  pointer-events: none; /* Man kann nicht versehentlich draufklicken */
+  user-select: none;
+}
   .grain {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://grainy-gradients.vercel.app/noise.svg');
@@ -255,6 +263,25 @@ body {
     .hero-nav { padding: 1rem 2rem; }
     .ticket-button { padding: 0.5rem 1rem; }
   }
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Bilder nebeneinander */
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .merch-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 Bilder auf Tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .merch-grid {
+    grid-template-columns: 1fr; /* 1 Bild auf Handys */
+  }
+}
+
+
 </style>
 
 <script>

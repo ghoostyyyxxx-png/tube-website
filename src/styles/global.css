@@ -1,6 +1,6 @@
 :root {
     --accent: #ff3e00;
-    --bg: #0c0c0c; /* Vorher #050505 - das neue Grau ist "wärmer" */
+    --bg: #000000; /* Vorher #050505 - das neue Grau ist "wärmer" */
     --text: #ffffff;
   }
 
@@ -59,3 +59,48 @@
     font-weight: bold;
     cursor: pointer;
   }
+  .gig-alarm {
+  padding: 6rem 1rem;
+  border-top: 1px solid #111;
+  text-align: center;
+}
+
+.alarm-content h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.alarm-form {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alarm-form input {
+  flex: 1;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  color: white;
+  padding: 1rem;
+  font-family: monospace;
+  outline: none;
+}
+
+.alarm-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.alarm-btn:hover {
+  opacity: 0.8;
+}
