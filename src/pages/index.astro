@@ -18,10 +18,10 @@ const socialLinks = [
   { name: "INSTAGRAM", url: "https://instagram.com/tubeofficial22" },
   { name: "SPOTIFY", url: "https://open.spotify.com/intl-de/artist/0zHfXqVADB6QEcKwb49wOB?si=Kmyk_DwiQQe_HlWkFK4HsA" }
 ];
-const merchItems = [
-{id : 1 , name: "TUBE SHIRT A"},
-{id : 2 , name:"TUBE SHIRT B"},
-{id : 3 , name:"TUBE SHIRT C"}
+const shirts = [
+{ id: 'A', main: 'shirtA_1', alt: 'shirtA_2' },
+{ id: 'B', main: 'shirtB_1', alt: 'shirtB_2' },
+{ id: 'C', main: 'shirtC_1', alt: 'shirtC_2' }
 ]
 const merchImages = [
   "shirtA_1", "shirtA_2", 
@@ -86,10 +86,17 @@ const merchImages = [
       <!--MERCH --> 
 <section id="merch" class="content-section">
   <h2 class="section-title">MERCH</h2>
-  <div class="merch-gallery">
-    {merchImages.map((img) => (
-      <div class="merch-picture">
-        <img src={`/images/merch/${img}.png`} alt="Merch Preview" loading="lazy" />
+  <div class="merch-grid">
+    {shirts.map((shirt) => (
+      <div class="merch-card">
+        <img 
+          src={`/images/merch/${shirt.main}.jpg`} 
+          class="merch-img clickable-photo" 
+          data-main={`/images/merch/${shirt.main}.jpg`}
+          data-alt={`/images/merch/${shirt.alt}.jpg`}
+          alt={`Shirt ${shirt.id}`}
+        />
+        <p class="tap-hint">Tap to flip</p>
       </div>
     ))}
   </div>
@@ -146,35 +153,38 @@ const merchImages = [
   --bg: #000000; /* Hier auf echtes Schwarz setzen */
   --text: #ffffff;
 }
-.merch-gallery {
+.merch-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 1rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 
-  .merch-picture {
-    background: #080808;
-    border: 1px solid #111;
-    overflow: hidden;
+  .merch-card {
+    text-align: center;
   }
 
-  .merch-picture img {
+  .merch-img {
     width: 100%;
     height: auto;
-    display: block;
-    transition: transform 0.5s ease;
+    cursor: pointer;
+    border: 1px solid #111;
+    transition: transform 0.3s ease;
   }
 
-  .merch-picture:hover img {
-    transform: scale(1.02); /* Minimaler Zoom-Effekt beim Drüberfahren */
+  .merch-img:active {
+    transform: scale(0.98); /* Kleiner Klick-Effekt */
   }
 
-  /* Auf dem Handy alles untereinander */
-  @media (max-width: 600px) {
-    .merch-gallery {
-      grid-template-columns: 1fr;
-    }
+  .tap-hint {
+    font-family: monospace;
+    font-size: 0.7rem;
+    opacity: 0.4;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    .merch-grid { grid-template-columns: 1fr; }
   }
 .bg-watermark {
   position: fixed;
@@ -346,4 +356,19 @@ body {
     });
   }
   document.addEventListener('DOMContentLoaded', initLightbox);
+</script>
+
+<script>
+  // Kleines Skript für den Bildwechsel
+  const photos = document.querySelectorAll('.clickable-photo');
+  
+  photos.forEach(photo => {
+    photo.addEventListener('click', () => {
+      const currentSrc = photo.getAttribute('src');
+      const mainSrc = photo.getAttribute('data-main');
+      const altSrc = photo.getAttribute('data-alt');
+      
+      photo.setAttribute('src', currentSrc === mainSrc ? altSrc : mainSrc);
+    });
+  });
 </script>
