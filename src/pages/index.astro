@@ -18,6 +18,15 @@ const socialLinks = [
   { name: "INSTAGRAM", url: "https://instagram.com/tubeofficial22" },
   { name: "SPOTIFY", url: "https://open.spotify.com/intl-de/artist/0zHfXqVADB6QEcKwb49wOB?si=Kmyk_DwiQQe_HlWkFK4HsA" }
 ];
+const merchItems = [
+{id : 1 , name: "TUBE SHIRT A"},
+{id : 2 , name:"TUBE SHIRT B"},
+{id : 3 , name:"TUBE SHIRT C"}
+]
+
+
+
+
 ---
 
 <html lang="de">
@@ -70,19 +79,22 @@ const socialLinks = [
         </div>
       </section>
       <!--MERCH --> 
-    <section id="merch" class="content-section">
+<section id="merch" class="content-section">
   <h2 class="section-title">MERCH</h2>
   <div class="merch-grid">
-    <div class="merch-item">
-      <div class="merch-img-container">
-        <img src="/images/merch/bild1.jpg" alt="Merch Item" />
+    {merchItems.map((item) => (
+      <div class="merch-item">
+        <div class="merch-img-container">
+        
+          <img src={`/images/merch/bild${item.id}.jpg`} alt={item.name} loading="lazy" />
+        </div>
+        <div class="merch-meta">
+          <h3>{item.name}</h3>
+          <p>BESTELLUNG VIA MAIL</p>
+        </div>
       </div>
-      <div class="merch-meta">
-        <h3>ARTIKEL NAME</h3>
-        <p>PREIS / BESTELLUNG VIA MAIL</p>
-      </div>
-    </div>
-    </div>
+    ))}
+  </div>
 </section>
       <!-- ARCHIVE -->
       <section id="archive" class="content-section">
@@ -99,7 +111,8 @@ const socialLinks = [
   <div class="alarm-content">
     <h2>GIG ALARM</h2>
     <p>Kein Spam. Nur eine Mail, wenn wir in deiner Stadt spielen.</p>
-    <form class="alarm-form">
+    <form name="gig-alarm"method="POST" data-netlify="true" class="alarm-form">
+      <input type="hidden" name="form-name" value="newsletter" />
       <input type="email" placeholder="DEINE E-MAIL ADRESSE" required />
       <button type="submit" class="alarm-btn">JOIN</button>
     </form>
@@ -265,7 +278,7 @@ body {
   }
 .merch-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 Bilder nebeneinander */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 2rem;
 }
 
