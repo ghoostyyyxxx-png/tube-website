@@ -1,0 +1,13 @@
+---
+const { shirt } = Astro.props;
+---
+<div class="merch-card">
+  <img 
+    src={`/images/merch/${shirt.main}.png`} 
+    class="merch-img clickable-photo" 
+    data-main={`/images/merch/${shirt.main}.png`}
+    data-alt={`/images/merch/${shirt.alt}.png`}
+    alt={`Shirt ${shirt.id}`}
+  />
+  <p class="tap-hint">Tap to flip</p>
+</div>

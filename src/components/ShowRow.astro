@@ -1,0 +1,13 @@
+---
+const { show } = Astro.props;
+---
+<div class="show-row">
+  <div class="show-main">
+    <span class="show-date">{show.date}</span>
+    <span class="show-location">
+      <span class="show-city">{show.city}</span>
+      <span class="show-venue">{show.venue}</span>
+    </span>
+  </div>
+  <a href={show.link} target="_blank" class="ticket-button">MORE</a>
+</div>
