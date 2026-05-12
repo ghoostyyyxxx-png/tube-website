@@ -90,10 +90,10 @@ const merchImages = [
     {shirts.map((shirt) => (
       <div class="merch-card">
         <img 
-          src={`/images/merch/${shirt.main}.jpg`} 
+          src={`/images/merch/${shirt.main}.png`} 
           class="merch-img clickable-photo" 
-          data-main={`/images/merch/${shirt.main}.jpg`}
-          data-alt={`/images/merch/${shirt.alt}.jpg`}
+          data-main={`/images/merch/${shirt.main}.png`}
+          data-alt={`/images/merch/${shirt.alt}.png`}
           alt={`Shirt ${shirt.id}`}
         />
         <p class="tap-hint">Tap to flip</p>
@@ -359,16 +359,21 @@ body {
 </script>
 
 <script>
-  // Kleines Skript für den Bildwechsel
   const photos = document.querySelectorAll('.clickable-photo');
   
   photos.forEach(photo => {
-    photo.addEventListener('click', () => {
-      const currentSrc = photo.getAttribute('src');
-      const mainSrc = photo.getAttribute('data-main');
-      const altSrc = photo.getAttribute('data-alt');
+    // Wir stellen sicher, dass es sich um ein HTMLImageElement handelt
+    const img = photo as HTMLImageElement;
+
+    img.addEventListener('click', () => {
+      const currentSrc = img.getAttribute('src');
+      const mainSrc = img.getAttribute('data-main');
+      const altSrc = img.getAttribute('data-alt');
       
-      photo.setAttribute('src', currentSrc === mainSrc ? altSrc : mainSrc);
+      // Nur ausführen, wenn alle Pfade existieren (verhindert den "null" Fehler)
+      if (currentSrc && mainSrc && altSrc) {
+        img.setAttribute('src', currentSrc === mainSrc ? altSrc : mainSrc);
+      }
     });
   });
 </script>
