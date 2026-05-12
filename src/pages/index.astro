@@ -108,25 +108,195 @@ const shirts = [
     --text: #ffffff;
   }
 
-  body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
-  
+  * { box-sizing: border-box; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .grain {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04; pointer-events: none; z-index: 50;
+  }
+
   .bg-watermark {
     position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 80vw; opacity: 0.03; z-index: -1; pointer-events: none; user-select: none;
+    filter: grayscale(1);
   }
 
-  /* Hier dein restliches, bereinigtes CSS... */
-  /* Ich habe die doppelten .merch-grid und .bg-watermark Regeln entfernt */
+  /* HERO SECTION */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
 
-  .merch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  @media (max-width: 900px) { .merch-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .merch-grid { grid-template-columns: 1fr; } }
+  .hero-nav {
+    position: absolute; top: 2rem; width: 100%;
+    display: flex; justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem; font-family: monospace; font-size: 0.75rem;
+    opacity: 0.5;
+  }
 
+  h1 {
+    font-size: clamp(5rem, 25vw, 15rem);
+    font-weight: 900; margin: 0; line-height: 0.8;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .hero-socials {
+    margin-top: 2rem;
+    font-family: monospace;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-socials a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .hero-socials a:hover { color: var(--accent); }
+
+  .separator { margin: 0 1rem; opacity: 0.3; }
+
+  /* COMMON SECTION STYLES */
+  .content-section {
+    padding: 8rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 0.8rem;
+    font-family: monospace;
+    letter-spacing: 0.3rem;
+    margin-bottom: 4rem;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* SHOWS */
+  .show-container { border-top: 1px solid #222; }
+  
+  /* Diese Styles wirken in ShowRow.astro */
+  :global(.show-row) {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2.5rem 0; border-bottom: 1px solid #222;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  :global(.show-row:hover) { background: #0f0f0f; padding-left: 1rem; padding-right: 1rem; }
+  :global(.show-main) { display: flex; align-items: baseline; gap: 3rem; }
+  :global(.show-date) { font-family: monospace; font-size: 1.2rem; opacity: 0.5; }
+  :global(.show-location) { display: flex; flex-direction: column; }
+  :global(.show-city) { font-size: 2rem; font-weight: 900; text-transform: uppercase; }
+  :global(.show-venue) { font-size: 0.9rem; opacity: 0.4; text-transform: uppercase; }
+  :global(.ticket-button) {
+    text-decoration: none; color: white; border: 1px solid #444;
+    padding: 0.8rem 2rem; border-radius: 50px; font-size: 0.8rem;
+    font-weight: bold; transition: all 0.3s;
+  }
+  :global(.ticket-button:hover) { background: white; color: black; border-color: white; }
+
+  /* MERCH */
+  .merch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  :global(.merch-card) { text-align: center; }
+  :global(.merch-img) {
+    width: 100%; height: auto; cursor: pointer;
+    border: 1px solid #111; transition: transform 0.3s ease;
+  }
+  :global(.merch-img:active) { transform: scale(0.98); }
+  :global(.tap-hint) {
+    font-family: monospace; font-size: 0.7rem; opacity: 0.4;
+    margin-top: 0.5rem; text-transform: uppercase;
+  }
+
+  .merch-footer {
+    margin-top: 3rem; text-align: center;
+    border-top: 1px solid #111; padding-top: 2rem;
+  }
+  .merch-footer p {
+    font-family: monospace; font-size: 0.9rem;
+    letter-spacing: 1px; text-transform: uppercase; opacity: 0.7;
+  }
+
+  /* ARCHIVE / MEDIA GRID */
+  .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .media-item img {
+    width: 100%; aspect-ratio: 1; object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    cursor: pointer; border-radius: 2px;
+  }
+  .media-item:hover img { transform: scale(1.05); z-index: 10; }
+
+  /* NEWSLETTER */
+  :global(.newsletter-section) {
+    padding: 6rem 2rem; text-align: center;
+    border-top: 1px solid #111; max-width: 600px; margin: 0 auto;
+  }
+  :global(#newsletter-form) { display: flex; gap: 1rem; justify-content: center; }
+  :global(#newsletter-form input) {
+    background: transparent; border: 1px solid #333;
+    color: white; padding: 1rem; font-family: monospace; width: 100%;
+  }
+  :global(#newsletter-form button) {
+    background: white; color: black; border: none;
+    padding: 0 2rem; font-weight: bold; cursor: pointer;
+  }
+
+  /* FOOTER */
+  footer { padding: 10rem 2rem 5rem; text-align: center; background: #000; }
+  .footer-content h2 { font-size: 4rem; margin-bottom: 2rem; letter-spacing: -2px; }
   .business-mail { color: var(--accent); text-decoration: none; font-family: monospace; }
   .copyright { margin-top: 3rem; opacity: 0.2; font-size: 0.6rem; letter-spacing: 2px; }
 
-  /* Deine restlichen Styles für Hero, Archive, Lightbox etc. bleiben gleich */
-  /* ... */
+  /* LIGHTBOX */
+  .lightbox {
+    display: none; position: fixed; z-index: 1000; top: 0; left: 0;
+    width: 100%; height: 100%; background: rgba(0,0,0,0.98);
+    justify-content: center; align-items: center;
+  }
+  .lightbox-content { max-width: 90%; max-height: 85%; object-fit: contain; }
+  .close { position: absolute; top: 20px; right: 30px; font-size: 40px; cursor: pointer; color: white; }
+
+  /* RESPONSIVE */
+  @media (min-width: 768px) {
+    .media-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  }
+  @media (max-width: 900px) {
+    .merch-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    :global(.show-main) { flex-direction: column; gap: 0.5rem; }
+    :global(.show-city) { font-size: 1.5rem; }
+    .hero-nav { padding: 1rem 2rem; }
+    :global(.ticket-button) { padding: 0.5rem 1rem; }
+    h1 { font-size: 5rem; }
+  }
+  @media (max-width: 600px) {
+    .merch-grid { grid-template-columns: 1fr; }
+    :global(#newsletter-form) { flex-direction: column; }
+  }
 </style>
 
 <script>
