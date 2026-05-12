@@ -23,6 +23,11 @@ const merchItems = [
 {id : 2 , name:"TUBE SHIRT B"},
 {id : 3 , name:"TUBE SHIRT C"}
 ]
+const merchImages = [
+  "shirtA_1", "shirtA_2", 
+  "shirtB_1", "shirtB_2", 
+  "shirtC_1", "shirtC_2"
+];
 
 
 
@@ -81,17 +86,10 @@ const merchItems = [
       <!--MERCH --> 
 <section id="merch" class="content-section">
   <h2 class="section-title">MERCH</h2>
-  <div class="merch-grid">
-    {merchItems.map((item) => (
-      <div class="merch-item">
-        <div class="merch-img-container">
-        
-          <img src={`/images/merch/bild${item.id}.jpg`} alt={item.name} loading="lazy" />
-        </div>
-        <div class="merch-meta">
-          <h3>{item.name}</h3>
-          <p>BESTELLUNG VIA MAIL</p>
-        </div>
+  <div class="merch-gallery">
+    {merchImages.map((img) => (
+      <div class="merch-picture">
+        <img src={`/images/merch/${img}.png`} alt="Merch Preview" loading="lazy" />
       </div>
     ))}
   </div>
@@ -110,7 +108,7 @@ const merchItems = [
       <section class="gig-alarm">
   <div class="alarm-content">
     <h2>GIG ALARM</h2>
-    <p>Kein Spam. Nur eine Mail, wenn wir in deiner Stadt spielen.</p>
+    <p>Kein Spam. Nur eine Mail, wenn unsere nächste Show geht</p>
     <form name="gig-alarm"method="POST" data-netlify="true" class="alarm-form">
       <input type="hidden" name="form-name" value="newsletter" />
       <input type="email" placeholder="DEINE E-MAIL ADRESSE" required />
@@ -148,6 +146,36 @@ const merchItems = [
   --bg: #000000; /* Hier auf echtes Schwarz setzen */
   --text: #ffffff;
 }
+.merch-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 Bilder nebeneinander, damit man Details sieht */
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .merch-picture {
+    background: #080808;
+    border: 1px solid #111;
+    overflow: hidden;
+  }
+
+  .merch-picture img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .merch-picture:hover img {
+    transform: scale(1.02); /* Minimaler Zoom-Effekt beim Drüberfahren */
+  }
+
+  /* Auf dem Handy alles untereinander */
+  @media (max-width: 600px) {
+    .merch-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
 .bg-watermark {
   position: fixed;
   top: 50%;
