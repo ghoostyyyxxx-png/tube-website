@@ -336,6 +336,63 @@ const shirts = [
   opacity: 0.5;
   font-size: 0.9rem;
   line-height: 1.6;
+}/* In der index.astro im <style> Block */
+
+:global(#newsletter-form) {
+  display: flex;
+  gap: 0; /* Wir machen die Lücke weg für den "Seamless"-Look */
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+:global(#newsletter-form input) {
+  background: transparent;
+  border: 1px solid #333;
+  border-right: none; /* Entfernt die Linie zwischen Input und Button */
+  color: white;
+  padding: 0.8rem 1rem;
+  font-family: monospace;
+  flex: 1; /* Das Feld nimmt den restlichen Platz ein */
+  min-width: 0; /* Wichtig für Flexbox auf Handys */
+  border-radius: 0; /* Verhindert abgerundete Ecken auf iPhones */
+}
+
+:global(#newsletter-form button) {
+  background: white;
+  color: black;
+  border: 1px solid white;
+  padding: 0 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: monospace;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Verhindert, dass der Text "JOIN" umbricht */
+}
+
+:global(#newsletter-form button:hover) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Spezieller Fix für Handys, damit es nicht untereinander springt */
+@media (max-width: 600px) {
+  :global(#newsletter-form) {
+    flex-direction: row; /* Stellt sicher, dass es NEBENEINANDER bleibt */
+    padding: 0 1rem;
+  }
+  
+  :global(#newsletter-form input) {
+    font-size: 0.8rem; /* Etwas kleinere Schrift für schmale Handys */
+  }
+
+  :global(#newsletter-form button) {
+    padding: 0 1rem;
+    font-size: 0.8rem;
+  }
 }
 </style>
 
