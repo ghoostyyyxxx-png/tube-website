@@ -274,15 +274,34 @@ const shirts = [
   .business-mail { color: var(--accent); text-decoration: none; font-family: monospace; }
   .copyright { margin-top: 3rem; opacity: 0.2; font-size: 0.6rem; letter-spacing: 2px; }
 
-  /* LIGHTBOX */
-  .lightbox {
-    display: none; position: fixed; z-index: 1000; top: 0; left: 0;
-    width: 100%; height: 100%; background: rgba(0,0,0,0.98);
-    justify-content: center; align-items: center;
+  lightbox {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; /* Viel höher als die 50 vom Grain! */
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.98);
+    justify-content: center; 
+    align-items: center;
+    cursor: pointer; /* Zeigt an, dass man überall klicken kann zum Schließen */
   }
-  .lightbox-content { max-width: 90%; max-height: 85%; object-fit: contain; }
-  .close { position: absolute; top: 20px; right: 30px; font-size: 40px; cursor: pointer; color: white; }
+  
+  .lightbox-content { 
+    max-width: 90%; 
+    max-height: 85%; 
+    object-fit: contain; 
+    z-index: 1001; /* Das Bild selbst noch ein Stück höher */
+    cursor: default; /* Klick aufs Bild macht nichts */
+  }
 
+  .close { 
+    position: absolute; 
+    top: 20px; right: 30px; 
+    font-size: 40px; 
+    cursor: pointer; 
+    color: white; 
+    z-index: 1002; /* Das X muss ganz oben liegen */
+  }
   /* RESPONSIVE */
   @media (min-width: 768px) {
     .media-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
@@ -321,19 +340,41 @@ const shirts = [
 </style>
 
 <script>
-  // Script-Logik bleibt hier oder kann auch in Components
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
-  document.querySelectorAll('.media-item img').forEach(image => {
-    image.addEventListener('click', () => {
-      const src = image.getAttribute('src');
-      if (src && lightbox && lightboxImg) {
-        lightbox.style.display = 'flex';
-        lightboxImg.src = src;
-      }
+  //Lightbox
+  function setupLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    
+    if (!lightbox || !lightboxImg) return;
+
+    // 1. Öffnen
+    document.querySelectorAll('.media-item img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        const target = e.target as HTMLImageElement;
+        const src = target.getAttribute('src');
+        if (src) {
+          lightboxImg.src = src;
+          lightbox.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      });
     });
-  });
+
+    // 2. Schließen (Einfach auf die ganze Lightbox klicken)
+    lightbox.addEventListener('click', (e) => {
+      // Wenn man auf das Bild klickt, soll es NICHT schließen
+      if (e.target === lightboxImg) return;
+      
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      lightboxImg.src = ''; // Pfad leeren für Performance
+    });
+  }
+
+  // Sicherstellen, dass Astro das Skript nach jedem Seitenladen ausführt
+  document.addEventListener('DOMContentLoaded', setupLightbox);
+  // Falls du Astro-Transitions nutzt, auch diesen Event-Listener dazu:
+  document.addEventListener('astro:page-load', setupLightbox);
 
   // Merch Flip
   const photos = document.querySelectorAll('.clickable-photo');
