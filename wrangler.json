@@ -1,6 +1,9 @@
 {
   "name": "tube-website",
   "compatibility_date": "2026-05-28",
+  "assets": {
+    "directory": "./dist"
+  },
   "kv_namespaces": [
     {
       "binding": "SESSION",
