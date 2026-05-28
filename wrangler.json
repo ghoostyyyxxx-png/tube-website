@@ -1,0 +1,10 @@
+{
+  "name": "tube-website",
+  "compatibility_date": "2026-05-28",
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "c39ff2331031404a9adf1d51a0e5119e"
+    }
+  ]
+}
