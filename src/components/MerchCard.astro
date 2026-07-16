@@ -1,14 +1,24 @@
 ---
 const { shirt } = Astro.props;
+
+// Wir prüfen, ob es ein alternatives Bild gibt (also ob shirt.alt existiert und nicht leer ist)
+const hasAltImage = shirt.alt && shirt.alt.trim() !== "";
 ---
 <div class="merch-card">
   <img 
     src={`/images/merch/${shirt.main}.png`} 
-    class="merch-img clickable-photo" 
+    class={`merch-img clickable-photo ${hasAltImage ? 'can-flip' : 'no-flip'}`} 
     data-main={`/images/merch/${shirt.main}.png`}
-    data-alt={`/images/merch/${shirt.alt}.png`}
+    // Wenn kein Alt-Bild da ist, lassen wir das Attribut einfach leer oder setzen es auf das Hauptbild
+    data-alt={hasAltImage ? `/images/merch/${shirt.alt}.png` : `/images/merch/${shirt.main}.png`}
     alt={`Shirt ${shirt.id}`}
   />
-  <link rel="prefetch" href={`/images/merch/${shirt.alt}.png`} />
-  <p class="tap-hint">Tap to flip</p>
+  
+  {/* Das Prefetching und den Text "Tap to flip" rendern wir NUR, wenn es ein zweites Bild gibt */}
+  {hasAltImage && (
+    <>
+      <link rel="prefetch" href={`/images/merch/${shirt.alt}.png`} />
+      <p class="tap-hint">Tap to flip</p>
+    </>
+  )}
 </div>
